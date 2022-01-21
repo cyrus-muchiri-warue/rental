@@ -1,6 +1,6 @@
 @extends("template.app")
 @section("title")
-<title>LandLord|Dashboard</title>
+<title>Tenant|Dashboard</title>
 @endsection
 
 @section("stylesheet")
@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="{{asset('admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
 @endsection
 @section('sidebar')
-<x-landlord.side-bar></x-landlord.side-bar>
+<x-tenant.side-bar></x-tenant.side-bar>
 @endsection
 @section("main-section")
   <div class="row">
@@ -20,7 +20,7 @@
             <div class="card card-primary mt-8">
          
               <!-- form start -->
-              <form action="{{route('category.update',$categorys[0]->id)}}" method="post">
+              <form action="{{route('category.update',$category[0]->id)}}" method="post">
               @csrf
               @method('put')
             

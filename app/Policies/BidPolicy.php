@@ -41,7 +41,7 @@ class BidPolicy
         }
         
         //return $user->id!==$bid->roomate->user_id;
-        return $user->id===$bid->roomate->user_id;
+       // return $user->id===$bid->roomate->user_id;*/
     }
 
     /**

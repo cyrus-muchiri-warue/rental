@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Location;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class LocationController extends Controller
@@ -14,8 +15,21 @@ class LocationController extends Controller
      */
     public function index()
     {
-        $locations=Location::all();
-        return view('template.landlord.location-index',compact('locations'));
+      $user=User::find(auth()->user()->id);
+      if ($user->hasRole('landlord')) {
+          # code...
+
+          $locations=Location::all();
+          return view('template.landlord.location-index',compact('locations'));
+      } else {
+          # code...
+          $locations=Location::all();
+        return view('template.tenant.location-index',compact('locations'));
+      }
+      
+
+        
+        
     }
 
     /**
@@ -26,8 +40,17 @@ class LocationController extends Controller
     public function create()
     {
         //
-        $locations=Location::all();
-        return view('template.landlord.location-create',compact('locations'));
+        $user=User::find(auth()->user()->id);
+        if ($user->hasRole('landlord')) {
+            $locations=Location::all();
+           return view('template.landlord.location-create',compact('locations'));
+        } else {
+            $locations=Location::all();
+        return view('template.tenant.location-create',compact('locations'));
+        }
+        
+        
+       
     }
 
     /**
@@ -38,8 +61,7 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
-        //'
-        //dd($request->all());
+       
         $location=new Location();
         $location->location=$request->location;
         $location->save();
@@ -55,7 +77,16 @@ class LocationController extends Controller
     public function show($id)
     {
         //
-        return view('template.landlord.location-index');
+        $user=User::find(auth()->user()->id);
+        if ($user->hasRole('landlord')) {
+            $location=Location::find($id);
+        return view('template.landlord.location-edit',compact('location'));
+        } else {
+            $location=Location::find($id);
+            return view('template.tenant.location-edit',compact('location'));
+        }
+        
+        //return view('template.landlord.location-index');
     }
 
     /**
@@ -67,8 +98,18 @@ class LocationController extends Controller
     public function edit($id)
     {
         //
-        $location=Location::find($id);
+      
+        
+        $user=User::find(auth()->user()->id);
+        if ($user->hasRole('landlord')) {
+            $location=Location::find($id);
         return view('template.landlord.location-edit',compact('location'));
+        } else {
+            $location=Location::find($id);
+            return view('template.tenant.location-edit',compact('location'));
+        }
+        
+       
     }
 
     /**
@@ -83,7 +124,7 @@ class LocationController extends Controller
        $location=Location::find($id);
        $location->location=$request->location;
        $location->save();
-       return redirect(route('locations.index'));
+       return redirect()->back();
     }
 
     /**

@@ -17,7 +17,7 @@
                     <label for="exampleSelectBorderWidth2">Enter Category</label>
                       <select class="custom-select form-control-border" id="exampleSelectBorder" name="category">
                         <option class="hidden"> </option>
-                        @foreach($categories as $category)
+                        @foreach($categorys as $category)
                         <option value="{{$category->category}}">{{$category->category}}</option>
                         @endforeach
                        

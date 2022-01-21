@@ -16,7 +16,7 @@ class postCreate extends Component
     public function __construct($categories,$locations)
     {
         //
-        $this->categories=$categories;
+        $this->categorys=$categories;
         $this->locations=$locations;
     }
     /**

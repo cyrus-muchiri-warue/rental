@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -13,10 +14,21 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $categorys=Category::all();
+    {   
+
+        $user=User::find(auth()->user()->id);
+        if ($user->hasRole('landlord')) {
+            $categorys=Category::all();
     
         return view("template.landlord.category-index",compact("categorys"));
+           
+        } else {
+            $categorys=Category::all();
+    
+            return view("template.tenant.category-index",compact("categorys"));
+        }
+        
+        
     }
 
     /**
@@ -27,7 +39,14 @@ class CategoryController extends Controller
     public function create()
     {
         //
-        return view('template.landlord.category-create');
+        $user=User::find(auth()->user()->id);
+        if ($user->hasRole('landlord')) {
+            return view('template.landlord.category-create');
+        } else {
+            return view('template.tenant.category-create');
+        }
+        
+        
     }
 
     /**
@@ -38,12 +57,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+      
         
         $category=new Category($request->all());
         $category->save();
         
        
-        return redirect(route('category.index'));
+        return redirect()->back();
     }
 
     /**
@@ -55,8 +75,14 @@ class CategoryController extends Controller
     public function show($id)
     {
         //
+        $user=User::find(auth()->user()->id);
+        if ($user->hasRole('landlord')) {
+            return view('template.landlord.category-show');
+        } else {
+            return view('template.landlord.category-show');
+        }
        
-        return view('template.landlord.category-show');
+       
     }
 
     /**
@@ -67,10 +93,19 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category=Category::where("id",$id)->get();
+        $user=User::find(auth()->user()->id);
+        if ($user->hasRole('landlord')) {
+            # code...
+            $category=Category::where("id",$id)->get();
+            return view('template.landlord.category-edit',compact('category'));
+        } else {
+            $category=Category::where("id",$id)->get();
         
         
-        return view('template.landlord.category-edit',compact('category'));
+            return view('template.tenant.category-edit',compact('category'));
+        }
+        
+       
     }
 
     /**
@@ -87,7 +122,7 @@ class CategoryController extends Controller
         $category=Category::find($id);
         $category->category=$request->category;
         $category->save();
-        return redirect(route('category.index'));
+        return redirect()->back();
     }
 
     /**

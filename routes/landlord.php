@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('landlord')->group(function () {
     Route::resource('posts', PostController::class);
-    Route::resource('locations', LocationController::class);
-    Route::resource('category', CategoryController::class);
+    Route::resource('location', LocationController::class);
+    Route::resource('categorys', CategoryController::class);
+    
    
 });

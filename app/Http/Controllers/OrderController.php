@@ -47,7 +47,8 @@ class OrderController extends Controller
         $order->user_id=$request->userId;
         $order->post_id=$request->postId;
         $order->save();
-        return response()->json(['status'=>'success','data'=>$request->all()]);
+        $data=['message'=>'Your order was placed successfull'];
+        return response()->json(['status'=>'success','data'=>$data]);
     }
 
     /**

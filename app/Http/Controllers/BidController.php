@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class BidController extends Controller
 {
+   
     /**
      * Display a listing of the resource.
      *
@@ -23,6 +24,7 @@ class BidController extends Controller
         //
         
         $bids=Bid::all();
+    
         return view('template.tenant.notifications-index',compact('bids'));
     }
 
@@ -51,7 +53,9 @@ class BidController extends Controller
         $bid->roomate_id=$request->roomateId;
         $bid->amount=$request->amount;
         $bid->save();
-        return response()->json(['status'=>'success','data'=>$request->all()]);
+
+        $data=['message'=>'Your Bid was placed successful'];
+        return response()->json(['status'=>'success','data'=>$data]);
        
     }
 

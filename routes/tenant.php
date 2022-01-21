@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RoomateController;
+use App\Models\Location;
 use App\Models\Order;
 use App\Models\Post;
 use App\Models\Roomate;
@@ -37,4 +39,7 @@ Route::prefix('tenant')->group(function () {
         })->name('checkout.show');
     Route::get('/My-Post', [RoomateController::class, 'ownPost'])->name('ownpost');
     Route::resource('/roomates',RoomateController::class);
+
+   
+  
 });

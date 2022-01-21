@@ -29,6 +29,7 @@
                   <tr>
                   <th>s.no</th>
                     <th>bidder's name</th>
+                    <th>Bid Amount (Kshs.)</th>
                     <th>offer category</th>
                     <th>image</th>
                     
@@ -47,12 +48,13 @@
               <a href="{{route('bids.show',$bid->id)}}" target="_blank" rel="noopener noreferrer" class="btn-link text-secondary">
                 {{$bid->user->name}}</a>
                 </td><!--order id.-->
+                <td>{{$bid->amount}}/=</td>
               <td>{{$bid->roomate->category}}</td>
               <td>
               <img src="{{Storage::url($bid->roomate->image)}}" class="rounded-full h-24 w-24 object-cover overflow-hidden" alt="image here" srcset="">
               </td>
               
-                
+               
               
               <td><i class="fas fa-edit"></i>
                   <a href="{{route('bids.edit',$bid->id)}}">
@@ -81,9 +83,11 @@
                   <tfoot>
                   <tr>
                   <th>s.no</th>
-                    <th>client info</th>
-                    <th>Bulding Name</th>
+                    <th>bidder's name</th>
+                    <th>Bid Amount (Kshs.)</th>
+                    <th>offer category</th>
                     <th>image</th>
+                    
                     <th>Edit</th>
                     <th>delete</th>
                   </tr>

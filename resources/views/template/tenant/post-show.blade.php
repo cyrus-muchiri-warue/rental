@@ -47,6 +47,7 @@
          success:function($result){
            //$('#status').removeAttr('hidden').html($result.status);
                console.log($result.data);
+               alert($result.data.message);
          }
        });
 

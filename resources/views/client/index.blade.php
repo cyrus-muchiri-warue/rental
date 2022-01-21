@@ -11,7 +11,7 @@
   <meta charset="utf-8"/>
 
   <!-- Site Title-->
-  <title>RentalApp</title>
+  <title>{{config('app.name','RentalApp')}}</title>
 
   <!-- Mobile Specific Metas-->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -63,7 +63,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">RentalApp</a>
+        <a class="navbar-brand" href="#">{{config('app.name','RentalApp')}}</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
